@@ -1,0 +1,129 @@
+@font-face {
+    font-family: 'iconfont';  /* project id 1163077 */
+    src: url('//at.alicdn.com/t/font_1163077_k012lh8rdjb.eot');
+    src: url('//at.alicdn.com/t/font_1163077_k012lh8rdjb.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_1163077_k012lh8rdjb.woff2') format('woff2'),
+    url('//at.alicdn.com/t/font_1163077_k012lh8rdjb.woff') format('woff'),
+    url('//at.alicdn.com/t/font_1163077_k012lh8rdjb.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_1163077_k012lh8rdjb.svg#iconfont') format('svg');
+}
+
+.tabIcon{
+    display: block;
+    height: 24px;
+    line-height: 24px;
+    padding: 5px;
+    font-size: 24px;
+    text-align: center;
+}
+.tabText{
+    width: 100%;
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-align: center;
+    line-height: 22px;
+}
+
+.mint-field{
+    border-bottom: 1px solid #cccccc;
+}
+.mint-field:nth-child(1){
+    border-top: 1px solid #cccccc;
+}
+
+.mint-field .mint-cell-title{
+    text-align: right;
+    padding-right: 18px;
+}
+
+.mint-field-core{
+    width: 0px;
+    background: transparent;
+}
+
+.tabTitle{
+    margin: 20px auto;
+    text-align: center;
+    letter-spacing: 3px;
+}
+.allContainer{
+    width: 95%;
+    height: auto;
+    margin: 0 auto;
+    padding: 2%;
+    border: 1px solid #cccccc;
+}
+
+.cardCodeInput{
+    border: 1px solid #cccccc;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 20px auto;
+    text-align: center;
+    letter-spacing: 3px;
+}
+
+.cardCodeInput input{
+    width: 100%;
+    height: auto;
+    text-align: left;
+    border: none;
+    background: transparent;
+    outline: none;
+}
+
+.userContanier{
+    width: 100%;
+    height: 100px;
+}
+.userContanier .userImg{
+    width: auto;
+    float: left;
+}
+.userContanier .userImg img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+.userTitle{
+    font-size: 12px;
+    color: rgba(17,17,17,0.8);
+}
+.userContanier .userInfo{
+    width: auto;
+    float: left;
+}
+.userInfo div{
+    width: auto;
+    text-align: left;
+    line-height: 29px;
+    margin-left: 17px;
+    font-size: 14px;
+    color: rgba(17,17,17,0.8);
+}
+.userInfo div span{
+    font-size: 12px;
+    color: rgba(17,17,17,0.8);
+}
+
+.rowLay{
+    width: 100%;
+    height: 36px;
+    line-height: 36px;
+    padding: 5px 0px;
+    border-bottom: 1px solid #cccccc;
+}
+.rowLay:nth-child(1){
+    border-top:1px solid #cccccc;
+}
+
+.rowLay div span{
+    font-size: 14px;
+    color: rgba(17,17,17,0.8);
+}
+.rowLay div{
+    width: 45%;
+    padding: 0 2%;
+    float: left;
+    text-align: left;
+}

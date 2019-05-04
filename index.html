@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/public.css">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
+    <link rel="stylesheet" href="./css/register.css">
+    <link rel="stylesheet" href="./css/iconfont.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/pay.css">
+    <link rel="stylesheet" href="./css/notice.css">
+    <title>天亿驾校</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 普通用户使用页面 -->
+        <div id="serviceHallHomePage">
+            <div class="contanier">
+                <!-- 页首 -->
+                <mt-header fixed class="header" title="首页">
+                    <mt-button slot="left" v-if="paystate !==''" style="font-size: 14px" v-on:click="back()">返回</mt-button>
+                </mt-header>
+
+                <!-- 主体内容 -->
+                <div class="mainBody">
+                    <mt-tab-container v-model="selected">
+<!--                        用户信息界面-->
+                        <mt-tab-container-item id="tab1">
+                            <div class="allContainer">
+                                <div class="userContanier">
+                                    <div class="userImg">
+                                        <img src="./img/register/a4.png" alt="图片载入失败">
+                                        <div class="userTitle">
+                                            {{formData.vipLv}}
+                                        </div>
+                                    </div>
+                                    <div class="userInfo">
+                                        <div>微信：<span>{{formData.WXname}}</span></div>
+                                        <div>手机：<span>{{formData.telNumber}}</span></div>
+                                        <div>地址：<span>{{formData.address}}</span></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="rowLay">
+                                        <div style="border-right: 1px solid #cccccc;">已提工资：<span>{{formData.takenWages}}</span></div>
+                                        <div>未提工资：<span>{{formData.noTakenWages}}</span></div>
+                                    </div>
+                                    <div class="rowLay">
+                                        <div style="border-right: 1px solid #cccccc;">本月招生：<span>{{formData.mouthRecruitNum}}</span></div>
+                                        <div>累计招生：<span>{{formData.allRecruitNum}}</span></div>
+                                    </div>
+                                    <div v-if="adminState ===true" class="rowLay" style="border: none;">
+                                        <div v-on:click="getMoney()">申请提现</div>
+                                        <div style="text-align: right;">>>></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mt-tab-container-item>
+
+<!--                        招生缴费-->
+                        <mt-tab-container-item id="tab2">
+                            <div style="overflow: hidden;position: relative;">
+                                <div v-if="paystate === ''">
+                                    <br><br><br>
+                                    <div class="tabTitle"></div>
+                                    <div class="cardCodeInput">
+                                        <input type="number" placeholder="请输入身份证号" v-model="cardCode" maxlength="18">
+                                    </div>
+                                    <mt-button class="button" size="normal" type="primary" v-on:click="judgeState">确认输入</mt-button>
+                                </div>
+
+                                <div v-if="paystate==='1'">
+                                    <mt-field label="姓名" v-model="stuData.WXname" disabled style="background: transparent;"></mt-field>
+                                    <mt-field label="身份证号" v-model="stuData.address" disabled style="background: transparent;"></mt-field>
+                                    <mt-field label="手机号" type="tel" v-model="stuData.telNumber" disabled style="background: transparent;"></mt-field>
+                                    <div class="photoContainer">
+                                        <div class="photoTitle">身份证正面照</div>
+                                        <div class="photoImg">
+                                            <img src="./img/register/a4.png" alt="图片载入失败">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="photoContainer">
+                                        <div class="photoTitle">身份证背面照</div>
+                                        <div class="photoImg">
+                                            <img src="./img/register/a4.png" alt="图片载入失败">
+                                        </div>
+                                    </div>
+
+                                    <mt-field label="学费" v-model="formData.pay" disabled style="background: transparent;"></mt-field>
+                                </div>
+
+                                <div v-if="paystate==='2'">
+                                    <mt-field label="姓名" v-model="stuData.WXname" disabled style="background: transparent;"></mt-field>
+                                    <mt-field label="身份证号" v-model="stuData.address" disabled style="background: transparent;"></mt-field>
+                                    <mt-field label="手机号" type="tel" v-model="stuData.telNumber" disabled style="background: transparent;"></mt-field>
+                                    <div class="photoContainer">
+                                        <div class="photoTitle">身份证正面照</div>
+                                        <div class="photoImg">
+                                            <img src="./img/register/a4.png" alt="图片载入失败">
+                                        </div>
+                                    </div>
+                                    <div class="photoContainer">
+                                        <div class="photoTitle">身份证背面照</div>
+                                        <div class="photoImg">
+                                            <img src="./img/register/a4.png" alt="图片载入失败">
+                                        </div>
+                                    </div>
+
+                                    <mt-field label="学费" v-model="formData.pay" disabled style="background: transparent;border: none;"></mt-field>
+                                    <div >
+                                        <mt-field label="应缴费用" v-model="stuData.payable" disabled style="background: transparent;"></mt-field>
+                                        <mt-field label="未缴费用" v-model="stuData.unpaid" disabled style="background: transparent;"></mt-field>
+                                        <mt-field v-if="adminState ===false" label="本次缴费" v-model="stuData.payNow" disabled style="background: transparent;"></mt-field>
+                                        <mt-button v-if="adminState ===true" class="button" size="normal" type="primary" v-on:click="check()">审核通过</mt-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </mt-tab-container-item>
+
+<!--                        消息通知-->
+                        <mt-tab-container-item id="tab3">
+                            <div class="noticeContainer" v-for="(item,index) in noticeData" :key="index">
+                                <div class="noticeTitle">
+                                    <strong>{{item.title}}</strong>
+                                </div>
+                                <div class="noticeOtherInfo">
+                                    <span>作者：{{item.author}}</span>
+                                    <span>时间：{{item.date}}</span>
+                                </div>
+                                <div class="noticeContent">
+                                    <div>{{item.content}}</div>
+                                </div>
+                            </div>
+                        </mt-tab-container-item>
+                    </mt-tab-container>
+
+
+
+                </div>
+            </div>
+
+            <!-- 页脚tab栏目 -->
+            <mt-tabbar v-model="selected" class="footer">
+                <mt-tab-item id="tab1">
+                    <i class="iconfont tabIcon">&#xe60c;</i>
+                    <div class="tabText">用户</div>
+                </mt-tab-item>
+                <mt-tab-item id="tab2">
+                    <i class="iconfont tabIcon" style="font-size: 30px;position: relative;top: -5px;">&#xe618;</i>
+                    <div class="tabText">缴费</div>
+                </mt-tab-item>
+                <mt-tab-item id="tab3">
+                    <template>
+                        <div v-on:click="test()">
+                            <i class="iconfont tabIcon">&#xe649;</i>
+                            <div class="tabText" >通知</div>
+                        </div>
+                    </template>
+
+                </mt-tab-item>
+            </mt-tabbar>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<!-- 先引入 Vue -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/mint-ui/lib/index.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data () {
+            return {
+                selected: "tab1",
+                formData:{
+                  WXname:"userName",
+                  telNumber:"123456789",
+                    address:"重庆市xxxxx哪里哪里",
+                    vipLv:'【内部员工】2',
+                    nowDeduct:"123",
+                    takenWages:"1234",
+                    noTakenWages:"233333",
+                    mouthRecruitNum:"12",
+                    allRecruitNum:"2345",
+                },
+                noticeData:[{
+                    title:"这是一个测试通知1",
+                    author:"作者",
+                    date:"2019-09-13",
+                    content:"查看文档，直接复制文档中提供的组件代码到项目中，即可使用。"
+                },{
+                    title:"这是一个测试通知2",
+                    author:"作者",
+                    date:"2019-09-13",
+                    content:"查看文档，直接复制文档中提供的组件代码到项目中，即可使用。"
+                }],
+                stuData:{
+                    WXname:"userName",
+                    telNumber:"123456789",
+                    address:"重庆市xxxxx哪里哪里",
+                    pay:"233443",
+                    payable:"1232",
+                    unpaid:"243",
+                    payNow:"0"
+                },
+                adminState:true,
+                idState:true,
+                paystate:"",
+                cardCode:""
+            };
+        },
+        methods: {
+            confirm(){
+                console.log(this.cardCode);
+            },
+            judgeState(code){
+                this.idState = false;
+                this.paystate = '2';
+            },
+            test(){
+                console.log("测试");
+            },
+            back(){
+                this.paystate = '';
+            },
+            check(){
+              console.log("审核通过");
+            },
+            getMoney(){
+                this.$toast({
+                    message: 'operation success',
+                    iconClass: 'icon icon-success'
+                })
+            }
+        }
+    })
+</script>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./../css/public.css">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
+    <link rel="stylesheet" href="./../css/register.css">
+    <title>天亿驾校用户注册页面</title>
+</head>
+<body>
+<!-- 注册页成功后的页面 -->
+<div id="app">
+
+    <div id="serviceHallHomePage">
+        <div class="contanier">
+            <!-- 页首 -->
+            <mt-header fixed class="header" title="注册成功">
+            </mt-header>
+
+            <!-- 主体内容 -->
+            <div class="mainBody">
+                <br><br><br><br>
+                <img class="successIcon" src="../img/register/registerSuccess.png" alt="图片载入失败">
+                <br><br><br><br>
+                <div class="successInfo">
+                    恭喜您完成用户注册，请等待审核。
+                </div>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="ServiceHallFooter">
+            <span class="mpCopyRight">Copyright © 2019 重庆天亿驾驶技术咨询服务有限公司 | ICP证: 沪ICP备15027489号-2</span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+<!-- 先引入 Vue -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/mint-ui/lib/index.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data () {
+            return {
+                userName: "",
+                userInfo: {
+                    userName: "",
+                    tel: "",
+                    address: "",
+                    Identity: "测试",
+                },
+                searchInput: "",
+                show: false,
+            };
+        },
+        methods: {
+            registerSuccess(){
+                console.log("这个函数执行了")
+                setTimeout(function(){
+                    self.location.href="../index.html"
+                }, 3000);
+            }
+        },
+        create(){
+           this.registerSuccess();
+        }
+    })
+    app.registerSuccess();
+</script>

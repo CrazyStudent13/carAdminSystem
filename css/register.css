@@ -1,0 +1,14 @@
+/*注册页面*/
+
+/*注册成功*/
+.successIcon{
+    width: 60px;
+    height: 60px;
+}
+
+.successInfo{
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+}
